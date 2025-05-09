@@ -1,0 +1,13 @@
+.base {
+    position: sticky;
+    top: 0;
+    height: var(--header-height);
+    background: var(--white);
+    z-index: var(--header-z-index);
+
+    .wrapper {
+        display: flex;
+        align-items: center;
+        height: 100%;
+    }
+}
