@@ -118,9 +118,7 @@ export default function HomePage() {
     }, []);
 
     useEffect(() => {
-        if (isScriptLoaded && currentLocation && mapRef.current && !mapInstance.current) {
-            initialize();
-        }
+        initialize();
     }, [isScriptLoaded, currentLocation]);
 
     useEffect(() => {
