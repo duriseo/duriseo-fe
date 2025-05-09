@@ -1,8 +1,10 @@
 :root {
     --line-height: 1.4;
     --max-width: 1440px;
+    --border-radius: 14px;
     --header-height: 64px;
     --bottom-navbar-height: 64px;
+    --sheet-z-index: 998;
     --header-z-index: 999;
     --bottom-navbar-z-index: 999;
     --white: #ffffff;
@@ -48,14 +50,15 @@ body {
 body {
     display: flex;
     flex-direction: column;
-    max-width: var(--max-width);
-    margin: 0 auto;
     background: var(--gray50);
 }
 
 main {
     flex: 1;
     overflow-y: auto;
+    max-width: var(--max-width);
+    width: 100%;
+    margin: 0 auto;
     background: var(--white);
 }
 

@@ -1,0 +1,57 @@
+.overlay {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: var(--drawer-z-index);
+    max-width: var(--max-width);
+    margin: 0 auto;
+    background: rgba(0, 0, 0, 0.8);
+}
+
+.content {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: var(--bottom-navbar-height);
+    z-index: var(--drawer-z-index);
+    background: var(--white);
+    padding: 2rem;
+
+    max-width: var(--max-width);
+    width: 100%;
+    margin: 0 auto;
+
+    .close {
+        position: absolute;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: calc(var(--border-radius) / 3.5);
+        border: none;
+        padding: .25rem;
+        right: 1rem;
+        top: 1rem;
+        cursor: pointer;
+
+        .icon {
+            width: 1.25rem;
+            height: 1.25rem;
+        }
+    }
+
+    .header {
+        display: flex;
+        flex-direction: column;
+
+        .title {
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .description {
+            color: var(--gray200);
+        }
+    }
+}

@@ -3,7 +3,6 @@ import "@/styles/global.scss";
 import React from "react";
 import localFont from "next/font/local";
 import BottomNavbar from "./components/BottomNavbar";
-import Header from "./components/Header";
 
 interface Props {
     children: Readonly<React.ReactNode>;
@@ -25,7 +24,6 @@ export default function RootLayout({ children }: Props) {
     return (
         <html lang="ko">
             <body className={font.className}>
-                <Header />
                 <main>
                     {children}
                 </main>

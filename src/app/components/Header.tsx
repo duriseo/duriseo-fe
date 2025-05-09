@@ -1,10 +1,14 @@
 import styles from "@/styles/components/Header.module.scss";
 
-const Header = () => {
+interface Props {
+    title: string;
+}
+
+const Header = ({ title }: Props) => {
     return (
         <header className={styles.base}>
             <div className={styles.wrapper}>
-                <h1>duriseo-fe</h1>
+                <h1>{title}</h1>
             </div>
         </header>
     );

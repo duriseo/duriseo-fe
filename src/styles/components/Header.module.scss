@@ -4,6 +4,7 @@
     height: var(--header-height);
     background: var(--white);
     z-index: var(--header-z-index);
+    padding: 0 1.25rem;
 
     .wrapper {
         display: flex;
