@@ -1,9 +1,6 @@
 .overlay {
     position: fixed;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
+    inset: 0;
     z-index: var(--drawer-z-index);
     max-width: var(--max-width);
     margin: 0 auto;
@@ -28,6 +25,7 @@
         display: inline-flex;
         align-items: center;
         justify-content: center;
+        background: var(--gray50);
         border-radius: calc(var(--border-radius) / 3.5);
         border: none;
         padding: .25rem;

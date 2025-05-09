@@ -13,6 +13,7 @@
     "dependencies": {
         "@heroicons/react": "^2.2.0",
         "@radix-ui/react-dialog": "^1.1.13",
+        "@radix-ui/react-visually-hidden": "^1.2.2",
         "next": "15.3.1",
         "react": "^19.0.0",
         "react-dom": "^19.0.0",
