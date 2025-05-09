@@ -29,20 +29,20 @@ RUN npm run build
 FROM base AS runner 
 WORKDIR /usr/src/duriseo-fe
 
-RUN addgroup --system --gid 1001 nodejs
-RUN adduser --system --uid 1001 nextjs
+# RUN addgroup --system --gid 1001 nodejs
+# RUN adduser --system --uid 1001 nextjs
 
-COPY --from=builder /usr/src/duriseo-fe/public ./public
+# COPY --from=builder /usr/src/duriseo-fe/public ./public
 
-# Set the correct permission for prerender cache
-RUN mkdir .next
-RUN chown nextjs:nodejs .next
+# # Set the correct permission for prerender cache
+# RUN mkdir .next
+# RUN chown nextjs:nodejs .next
 
-# Automatically leverage output traces to reduce image size
-# https://nextjs.org/docs/advanced-features/output-file-tracing
-COPY --from=builder --chown=nextjs:nodejs /usr/src/duriseo-fe/.next/standalone ./
-COPY --from=builder --chown=nextjs:nodejs /usr/src/duriseo-fe/.next/static ./.next/static
+# # Automatically leverage output traces to reduce image size
+# # https://nextjs.org/docs/advanced-features/output-file-tracing
+# COPY --from=builder --chown=nextjs:nodejs /usr/src/duriseo-fe/.next/standalone ./
+# COPY --from=builder --chown=nextjs:nodejs /usr/src/duriseo-fe/.next/static ./.next/static
 
-USER nextjs
+# USER nextjs
 
-CMD ["node", "server.js"]
+CMD ["npm", "run", "start"]
