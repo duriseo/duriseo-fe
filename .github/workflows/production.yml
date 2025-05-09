@@ -6,6 +6,8 @@ on:
 jobs:
     build:
         runs-on: ubuntu-latest
+        env:
+            NEXT_PUBLIC_API_BASEURL: https://duriseo.suhan.io/api
         steps:
             - uses: actions/checkout@v4
             - name: Create .env file
@@ -13,6 +15,7 @@ jobs:
               run: |
                 pwd
                 touch .env
+                echo NEXT_PUBLIC_API_BASEURL=${{ env.NEXT_PUBLIC_API_BASEURL }} >> .env
                 echo NEXT_PUBLIC_NCP_CLIENT_ID=${{ secrets.NCP_CLIENT_ID }} >> .env
                 cat .env
             - uses: docker/setup-buildx-action@v2
