@@ -4,6 +4,10 @@
     padding: 1rem 0;
     width: 100%;
 
+    a {
+        color: var(--black);
+    }
+
     .action {
         display: flex;
         align-items: center;
