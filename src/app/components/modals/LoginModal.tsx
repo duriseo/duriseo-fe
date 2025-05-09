@@ -25,7 +25,7 @@ const LoginModal = ({ showModal, setModal }: Props) => {
         if (response.code !== 200) {
             return toast.error("error");
         } else {
-            document.cookie = `token=${response.data.token}; path=/; max-age=604800`; // 7일
+            localStorage.setItem("token", response.data.token);
             toast.success("성공적으로 로그인했습니다.");
 
             await mutate(API_AUTH_PROFILE);

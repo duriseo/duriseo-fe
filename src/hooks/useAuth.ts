@@ -10,7 +10,7 @@ const useAuth = () => {
 
     const logout = async () => {
         try {
-            document.cookie = "token=; path=/; max-age=0";
+            localStorage.removeItem("token");
 
             await mutate(API_AUTH_PROFILE, null, false); // ← 캐시를 즉시 null로 설정
             router.replace("/");

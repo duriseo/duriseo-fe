@@ -7,14 +7,15 @@ const axiosInstance = axios.create({
     validateStatus: (status) => status <= 500,
 });
 
-function getTokenFromCookie(): string | null {
-    const cookies = document.cookie.split("; ");
-    const tokenCookie = cookies.find((cookie) => cookie.startsWith("token="));
-    return tokenCookie ? tokenCookie.split("=")[1] : null;
+function getTokenFromLocalStorage(): string | null {
+    if (typeof window !== "undefined") {
+        return localStorage.getItem("token");
+    }
+    return null;
 }
 
 axiosInstance.interceptors.request.use((config) => {
-    const token = getTokenFromCookie();
+    const token = getTokenFromLocalStorage();
     if (token) {
         config.headers = config.headers || {};
         config.headers.Authorization = `Bearer ${token}`;
