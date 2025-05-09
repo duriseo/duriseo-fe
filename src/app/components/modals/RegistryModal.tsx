@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Modal, ModalWrapper, ModalHeader, ModalTitle, ModalContent } from "../Modal";
 import styles from "@/styles/components/modals/RegistryModal.module.scss";
 import { toast } from "sonner";
@@ -52,6 +52,10 @@ const RegistryModal = ({ showModal, setModal }: Props) => {
             }
         });
     };
+
+    useEffect(() => {
+        if (!showModal) setAddressValid(false);
+    }, [showModal]);
 
     return (
         <>

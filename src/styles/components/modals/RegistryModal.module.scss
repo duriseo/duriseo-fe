@@ -9,10 +9,6 @@
         align-items: center;
         gap: .5rem;
 
-        .title {
-            margin: 1rem 0;
-        }
-
         input {
             display: inline-flex;
             width: 100%;
@@ -21,6 +17,32 @@
             border-radius: calc(var(--border-radius) / 2);
             font-size: 1rem;
             font-family: inherit;
+        }
+
+        .inputWrapper {
+            display: flex;
+            gap: .5rem;
+
+            input {
+                flex: 1;
+            }
+
+            button {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: 3rem;
+                height: 3rem;
+                background: var(--white);
+                border: 1px solid var(--gray100);
+                border-radius: calc(var(--border-radius) / 3);
+                cursor: pointer;
+                font-family: inherit;
+
+                &:hover {
+                    background: var(--gray50);
+                }
+            }
         }
     }
 
