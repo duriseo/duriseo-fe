@@ -1,10 +1,11 @@
 .base {
     position: sticky;
     top: 0;
-    height: var(--header-height);
+    min-height: var(--header-height);
     background: var(--white);
     z-index: var(--header-z-index);
-    padding: 0 1.25rem;
+    padding: 1rem;
+    border-bottom: 1px solid var(--gray50);
 
     .wrapper {
         display: flex;

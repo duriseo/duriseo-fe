@@ -8,7 +8,7 @@ const Header = ({ title }: Props) => {
     return (
         <header className={styles.base}>
             <div className={styles.wrapper}>
-                <h1>{title}</h1>
+                <h2>{title}</h2>
             </div>
         </header>
     );

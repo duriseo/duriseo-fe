@@ -5,10 +5,12 @@ import useAuth from "@/hooks/useAuth";
 import ApplyModal from "../components/modals/ApplyModal";
 import { useState } from "react";
 import RegistryModal from "../components/modals/RegistryModal";
+import VoucherModal from "../components/modals/VoucherModal";
 
 export default function ProfilePage() {
     const [showApplyModal, setApplyModal] = useState(false);
     const [showRegistryModal, setRegistryModal] = useState(false);
+    const [showVoucherModal, setVoucherModal] = useState(false);
     const { user, logout } = useAuth();
 
     const handleApplyClick = () => {
@@ -17,6 +19,10 @@ export default function ProfilePage() {
 
     const handleRegistryClick = () => {
         setRegistryModal(true);
+    };
+
+    const handleVoucherClick = () => {
+        setVoucherModal(true);
     };
 
     const humanizeRole = (role: string) => {
@@ -31,6 +37,7 @@ export default function ProfilePage() {
         <>
             <ApplyModal setModal={setApplyModal} showModal={showApplyModal} />
             <RegistryModal setModal={setRegistryModal} showModal={showRegistryModal} />
+            <VoucherModal setModal={setVoucherModal} showModal={showVoucherModal} />
             <div className={styles.base}>
                 <div className={styles.profileWrapper}>
                     <div className={styles.avatarWrapper}>
@@ -51,10 +58,16 @@ export default function ProfilePage() {
                     </div>
                 }
                 {user.role === "RESTAURANT_OWNER" &&
-                    <div className={styles.item}>
-                        <p>가게 관리</p>
-                        <span className={styles.apply} onClick={handleRegistryClick}>가게 등록</span>
-                    </div>
+                    <>
+                        <div className={styles.item}>
+                            <p>가게 관리</p>
+                            <span className={styles.apply} onClick={handleRegistryClick}>가게 추가</span>
+                        </div>
+                        <div className={styles.item}>
+                            <p>식권 관리</p>
+                            <span className={styles.apply} onClick={handleVoucherClick}>식권 등록</span>
+                        </div>
+                    </>
                 }
                 <div className={styles.authWrapper}>
                     <p onClick={logout}>로그아웃</p>
