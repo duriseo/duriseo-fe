@@ -30,13 +30,13 @@ ModalOverlay.displayName = "ModalOverlay";
 
 const ModalWrapper = React.forwardRef<
     React.ElementRef<typeof DialogPrimitive.Content>,
-    React.ComponentPropsWithoutRef<typeof DialogPrimitive.Content> & { fluid?: boolean }>(({ className, children, fluid, ...props }, ref) => {
+    React.ComponentPropsWithoutRef<typeof DialogPrimitive.Content>>(({ className, children, ...props }, ref) => {
         const dismissible = useDismissible();
 
         return (
             <ModalPortal>
                 <ModalOverlay />
-                <DialogPrimitive.Content ref={ref} className={[styles.wrapper, fluid ? styles.fluid : "", className].join(" ")}
+                <DialogPrimitive.Content ref={ref} className={[styles.wrapper, className].join(" ")}
                     onInteractOutside={(e) => !dismissible && e.preventDefault()}
                     onEscapeKeyDown={(e) => !dismissible && e.preventDefault()}
                     {...props}

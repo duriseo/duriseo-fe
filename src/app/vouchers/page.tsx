@@ -10,7 +10,7 @@ const data = [
         restaurantName: "세종대학교",
         expiresAt: "2025-05-10T00:00:00Z",
         status: "ISSUED"
-    }
+    },
 ];
 
 export default function VouchersPage() {

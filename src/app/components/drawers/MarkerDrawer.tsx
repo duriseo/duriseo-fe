@@ -17,7 +17,6 @@ const MarkerDrawer = ({ showDrawer, setDrawer, restaurant }: Props) => {
         <>
             <VoucherConfirmationModal showModal={showModal} setModal={setModal} />
             <Drawer open={showDrawer} onOpenChange={setDrawer}>
-                <DrawerTrigger></DrawerTrigger>
                 <DrawerContent>
                     <DrawerHeader>
                         <DrawerTitle>{restaurant.name}</DrawerTitle>

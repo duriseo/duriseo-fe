@@ -1,4 +1,3 @@
-import { CheckCircleIcon } from "@heroicons/react/24/outline";
 import { Modal, ModalWrapper, ModalContent } from "../Modal";
 import styles from "@/styles/components/modals/VoucherQRModal.module.scss";
 import { QRCodeSVG } from "qrcode.react";
