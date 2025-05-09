@@ -33,6 +33,6 @@ COPY --from=builder /usr/src/duriseo-fe/.next ./.next
 COPY --from=builder /usr/src/duriseo-fe/public ./public
 COPY --from=builder /usr/src/duriseo-fe/package.json ./package.json
 COPY --from=builder /usr/src/duriseo-fe/node_modules ./node_modules
-COPY --from=builder /usr/src/duriseo-fe/next.config.js ./next.config.ts
+COPY --from=builder /usr/src/duriseo-fe/next.config.ts ./next.config.ts
 
 CMD ["npm", "run", "start"]
