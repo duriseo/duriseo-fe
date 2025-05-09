@@ -22,10 +22,12 @@ jobs:
                 registry: ghcr.io
                 username: ${{ github.actor }}
                 password: ${{ secrets.GITHUB_TOKEN }}
-            - name: Build Docker Image
+            - name: Build Docker Image (ARM64)
               run: |
-                docker build -t ghcr.io/${{ github.repository }}:latest \
-                             -t ghcr.io/${{ github.repository }}:${{ github.sha }} .
+                docker buildx build --platform linux/arm64 \
+                             -t ghcr.io/${{ github.repository }}:latest \
+                             -t ghcr.io/${{ github.repository }}:${{ github.sha }} \
+                             --push .
             - name: Push Docker Image
               run: |
                 docker push ghcr.io/${{ github.repository }}:latest
