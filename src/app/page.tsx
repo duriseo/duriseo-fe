@@ -4,7 +4,6 @@ import Script from "next/script";
 import { useEffect, useRef, useState } from "react";
 import { v4 as uuid } from "uuid";
 import MarkerDrawer from "./components/drawers/MarkerDrawer";
-import MainOverlay from "./components/MainOverlay";
 import { ViewfinderCircleIcon } from "@heroicons/react/24/outline";
 
 type LatLng = { lat: number, lng: number } | null;

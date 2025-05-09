@@ -22,12 +22,12 @@ const BottomNavbar = () => {
                         <span>식권</span>
                     </Link>
                 </li>
-                <li className={styles.item}>
+                {/* <li className={styles.item}>
                     <Link className={[styles.link, pathname === "/store" ? styles.active : ""].join(" ")} href="/store">
                         <BuildingStorefrontIcon className={styles.icon} />
                         <span>가게 관리</span>
                     </Link>
-                </li>
+                </li> */}
                 <li className={styles.item}>
                     <Link className={[styles.link, pathname === "/profile" ? styles.active : ""].join(" ")} href="/profile">
                         <UserIcon className={styles.icon} />

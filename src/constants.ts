@@ -4,3 +4,6 @@ export const API_AUTH = API_BASEURL + "/auth";
 export const API_AUTH_SIGNUP = API_AUTH + "/signup";
 export const API_AUTH_LOGIN = API_AUTH + "/login";
 export const API_AUTH_PROFILE = API_AUTH + "/profile";
+
+export const API_BENEFICIARIES = API_BASEURL + "/beneficiaries";
+export const API_BENEFICIARIES_APPLY = API_BENEFICIARIES + "/apply";
