@@ -1,38 +1,21 @@
-FROM node:22.15.0-alpine AS base
-
-# Setup
-FROM base AS deps
-# Install missing dependencies
-RUN apk add --no-cache libc6-compat
+FROM node:22.15.0-alpine
 
 # Set working directory
 WORKDIR /usr/src/duriseo-fe
 
 # Copy package.json and package-lock.json
 COPY package*.json ./
-RUN npm ci --legacy-peer-deps
 
-# Build
-FROM base AS builder
-WORKDIR /usr/src/duriseo-fe
-
-# Copy necessary files
+# Copy environment variables
 COPY .env ./
-COPY --from=deps /usr/src/duriseo-fe/node_modules ./node_modules
+
+# Install dependencies
+RUN npm install
+
+# Copy the rest of the application
 COPY . .
 
-# Build the application
+# Build the Next.js application
 RUN npm run build
-
-# Running
-FROM base AS runner 
-WORKDIR /usr/src/duriseo-fe
-
-COPY --from=builder /usr/src/duriseo-fe/.env ./.env
-COPY --from=builder /usr/src/duriseo-fe/.next ./.next
-COPY --from=builder /usr/src/duriseo-fe/public ./public
-COPY --from=builder /usr/src/duriseo-fe/package.json ./package.json
-COPY --from=builder /usr/src/duriseo-fe/node_modules ./node_modules
-COPY --from=builder /usr/src/duriseo-fe/next.config.ts ./next.config.ts
 
 CMD ["npm", "run", "start"]
