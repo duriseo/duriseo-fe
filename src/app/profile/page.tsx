@@ -4,13 +4,19 @@ import { UserIcon } from "@heroicons/react/24/outline";
 import useAuth from "@/hooks/useAuth";
 import ApplyModal from "../components/modals/ApplyModal";
 import { useState } from "react";
+import RegistryModal from "../components/modals/RegistryModal";
 
 export default function ProfilePage() {
     const [showApplyModal, setApplyModal] = useState(false);
+    const [showRegistryModal, setRegistryModal] = useState(false);
     const { user, logout } = useAuth();
 
     const handleApplyClick = () => {
         setApplyModal(true);
+    };
+
+    const handleRegistryClick = () => {
+        setRegistryModal(true);
     };
 
     const humanizeRole = (role: string) => {
@@ -24,6 +30,7 @@ export default function ProfilePage() {
     return (
         <>
             <ApplyModal setModal={setApplyModal} showModal={showApplyModal} />
+            <RegistryModal setModal={setRegistryModal} showModal={showRegistryModal} />
             <div className={styles.base}>
                 <div className={styles.profileWrapper}>
                     <div className={styles.avatarWrapper}>
@@ -38,9 +45,15 @@ export default function ProfilePage() {
                     </div>
                 </div>
                 {user.role === "BENEFICIARY" &&
-                    <div className={styles.applyWrapper}>
+                    <div className={styles.item}>
                         <p>인증 서류 제출</p>
                         <span className={styles.apply} onClick={handleApplyClick}>제출하기</span>
+                    </div>
+                }
+                {user.role === "RESTAURANT_OWNER" &&
+                    <div className={styles.item}>
+                        <p>가게 관리</p>
+                        <span className={styles.apply} onClick={handleRegistryClick}>가게 등록</span>
                     </div>
                 }
                 <div className={styles.authWrapper}>
