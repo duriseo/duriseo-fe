@@ -29,7 +29,7 @@ const BottomNavbar = () => {
                     </Link>
                 </li>
                 <li className={styles.item}>
-                    <Link className={[styles.link, pathname === "/my" ? styles.active : ""].join(" ")} href="/my">
+                    <Link className={[styles.link, pathname === "/profile" ? styles.active : ""].join(" ")} href="/profile">
                         <UserIcon className={styles.icon} />
                         <span>마이페이지</span>
                     </Link>
