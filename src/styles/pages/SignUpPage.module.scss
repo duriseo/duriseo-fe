@@ -1,0 +1,58 @@
+.base {
+    display: flex;
+    flex-direction: column;
+    margin: 0 1rem;
+    gap: 1rem;
+
+    .title {
+        text-align: center;
+        padding: 2rem 0;
+    }
+
+    .inputWrapper {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        gap: 1rem;
+
+        .input {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+
+            select,
+            input {
+                display: inline-flex;
+                width: 100%;
+                padding: .75rem 1.5rem;
+                border: 1px solid var(--gray200);
+                border-radius: calc(var(--border-radius) / 2);
+                font-size: 1rem;
+                font-family: inherit;
+            }
+
+            label {
+                font-size: .825rem;
+                color: var(--gray400);
+            }
+        }
+    }
+
+    .submit {
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        padding: .75rem 1.5rem;
+        font-size: 1rem;
+        background: var(--primary600);
+        border: none;
+        border-radius: calc(var(--border-radius) / 2);
+        color: var(--white);
+        font-weight: 500;
+        cursor: pointer;
+
+        &:hover {
+            background: var(--primary700);
+        }
+    }
+}

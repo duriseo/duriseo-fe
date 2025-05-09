@@ -1,3 +1,5 @@
+@import "../_variables.scss";
+
 .overlay {
     position: fixed;
     inset: 0;
@@ -20,17 +22,17 @@
     z-index: var(--modal-z-index);
     overflow: hidden;
 
-    // @media (max-width: $viewport-lg) {
-    //     min-width: 50%;
-    // }
+    @media (max-width: $viewport-lg) {
+        min-width: 50%;
+    }
 
-    // @media (max-width: $viewport-md) {
-    //     min-width: 75%;
-    // }
+    @media (max-width: $viewport-md) {
+        min-width: 75%;
+    }
 
-    // @media (max-width: $viewport-sm) {
-    //     min-width: 90%;
-    // }
+    @media (max-width: $viewport-sm) {
+        min-width: 90%;
+    }
 
     .header {
         display: flex;
