@@ -17,6 +17,7 @@ FROM base AS builder
 WORKDIR /usr/src/duriseo-fe
 
 # Copy necessary files
+COPY .env ./
 COPY --from=deps /usr/src/duriseo-fe/node_modules ./node_modules
 COPY . .
 
