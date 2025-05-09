@@ -12,6 +12,8 @@ WORKDIR /usr/src/duriseo-fe
 COPY package*.json ./
 RUN npm ci --legacy-peer-deps
 
+COPY .env ./
+
 # Build
 FROM base AS builder
 WORKDIR /usr/src/duriseo-fe
