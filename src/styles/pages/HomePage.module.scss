@@ -3,6 +3,35 @@
     flex-direction: column;
     height: 100%;
 
+    .branding {
+        position: absolute;
+        top: 0;
+        z-index: var(--main-overlay-z-index);
+        background: var(--white);
+        margin: 1rem;
+        padding: .5rem;
+        border-radius: var(--border-radius);
+        box-shadow: var(--box-shadow-sm);
+    }
+
+    .currentLocation {
+        display: flex;
+        position: absolute;
+        background: var(--white);
+        bottom: var(--bottom-navbar-height);
+        z-index: var(--main-overlay-z-index);
+        margin: 1rem;
+        padding: .5rem;
+        border-radius: var(--border-radius);
+        box-shadow: var(--box-shadow-sm);
+        cursor: pointer;
+
+        .icon {
+            width: 2rem;
+            height: 2rem;
+        }
+    }
+
     .map {
         height: inherit;
     }

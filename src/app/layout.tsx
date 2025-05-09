@@ -3,6 +3,9 @@ import "@/styles/global.scss";
 import React from "react";
 import localFont from "next/font/local";
 import BottomNavbar from "./components/BottomNavbar";
+import { Toaster } from "sonner";
+import SWRProvider from "./components/SWRProvider";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 interface Props {
     children: Readonly<React.ReactNode>;
@@ -24,10 +27,13 @@ export default function RootLayout({ children }: Props) {
     return (
         <html lang="ko">
             <body className={font.className}>
-                <main>
-                    {children}
-                </main>
-                <BottomNavbar />
+                <SWRProvider>
+                    <Toaster position="top-center" />
+                    <main>
+                        {children}
+                    </main>
+                    <BottomNavbar />
+                </SWRProvider>
             </body>
         </html>
     );

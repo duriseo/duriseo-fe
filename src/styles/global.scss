@@ -4,10 +4,14 @@
     --border-radius: 14px;
     --header-height: 64px;
     --bottom-navbar-height: 64px;
+    --main-overlay-z-index: 997;
     --drawer-z-index: 998;
     --header-z-index: 999;
     --bottom-navbar-z-index: 999;
     --modal-z-index: 1000;
+    --box-shadow-sm: 0px 0px 7.5px -5px rgb(0 0 0 / 70%);
+    --box-shadow-md: 0px 0px 10px -7.5px rgb(0 0 0 / 70%);
+    --box-shadow-lg: 0px 0px 12.5px -7.5px rgb(0 0 0 / 70%);
     --white: #ffffff;
     --gray50: #f6f6f6;
     --gray100: #e7e7e7;

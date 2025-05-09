@@ -4,6 +4,10 @@ import Script from "next/script";
 import { useEffect, useRef, useState } from "react";
 import { v4 as uuid } from "uuid";
 import MarkerDrawer from "./components/drawers/MarkerDrawer";
+import MainOverlay from "./components/MainOverlay";
+import { ViewfinderCircleIcon } from "@heroicons/react/24/outline";
+
+type LatLng = { lat: number, lng: number } | null;
 
 const dummyData = [
     {
@@ -22,38 +26,67 @@ export default function HomePage() {
     const mapInstance = useRef<naver.maps.Map | null>(null);
     const mapRef = useRef<HTMLDivElement | null>(null);
     const [data, setData] = useState(dummyData);
-    const [currentLocation, setCurrentLocation] = useState({});
+    const [currentLocation, setCurrentLocation] = useState<LatLng>(null);
+    const [isScriptLoaded, setScriptLoaded] = useState(false);
     const [showMarkerDrawer, setMarkerDrawer] = useState(false);
     const [selectedRestaurant, setSelectedRestaurant] = useState(data[0]);
-    const markers = [];
+    const markers = useRef<naver.maps.Marker[]>([]);
 
     const initialize = () => {
-        if (!window.naver || !mapRef.current) return;
+        if (!mapRef.current || !currentLocation) return;
+
         console.log("map init");
 
-        if (mapInstance.current) mapInstance.current.destroy();
-
-        if (mapRef.current) {
-            const center = new naver.maps.LatLng(currentLocation.lat, currentLocation.lng);
-
-            const mapOptions = {
-                center,
-            };
-            mapInstance.current = new naver.maps.Map(mapRef.current, mapOptions);
-
+        if (mapInstance.current) {
+            mapInstance.current.destroy();
         }
+
+        const center = new naver.maps.LatLng(currentLocation.lat, currentLocation.lng);
+
+        const mapOptions = {
+            center,
+            zoom: 15,
+        };
+
+        mapInstance.current = new naver.maps.Map(mapRef.current, mapOptions);
+
+        addMarkers(); // 초기화 이후 마커 추가
     };
 
-    useEffect(() => {
-        initialize();
-    }, [currentLocation]);
+    const updateCurrentLocation = () => {
+        if (!navigator.geolocation) return;
 
-    useEffect(() => {
-        if (mapInstance.current) addMarkers();
-    }, [mapInstance.current]);
+        navigator.geolocation.getCurrentPosition(
+            (position) => {
+                const lat = position.coords.latitude;
+                const lng = position.coords.longitude;
+                setCurrentLocation({ lat, lng });
+            },
+            () => {
+                alert("위치 정보를 가져올 수 없습니다.");
+            }
+        );
+    };
 
-    // set markers after load
+    const handleCurrentLocationClick = () => {
+        if (!navigator.geolocation || !mapInstance.current) return;
+
+        navigator.geolocation.getCurrentPosition((position) => {
+            const lat = position.coords.latitude;
+            const lng = position.coords.longitude;
+            const location = new naver.maps.LatLng(lat, lng);
+
+            setCurrentLocation({ lat, lng });
+            mapInstance.current?.panTo(location);
+        });
+    };
+
     const addMarkers = () => {
+        if (!mapInstance.current) return;
+
+        markers.current.forEach((m) => m.setMap(null)); // 기존 마커 제거
+        markers.current = [];
+
         data.forEach((d) => {
             const marker = new naver.maps.Marker({
                 position: new naver.maps.LatLng(d.lat, d.lng),
@@ -61,24 +94,11 @@ export default function HomePage() {
                 title: d.name,
             });
 
-            markers.push(marker);
+            markers.current.push(marker);
 
             naver.maps.Event.addListener(marker, "click", () => onMarkerClick(d.id));
         });
     };
-
-    useEffect(() => {
-        navigator.geolocation.getCurrentPosition((position) => {
-            setCurrentLocation({ lat: position.coords.latitude, lng: position.coords.longitude });
-        });
-
-        return () => {
-            if (mapInstance.current) {
-                console.log("map destroy");
-                mapInstance.current.destroy();
-            }
-        }
-    }, []);
 
     const onMarkerClick = (id: string) => {
         console.log("click", id);
@@ -87,12 +107,41 @@ export default function HomePage() {
         setMarkerDrawer(true);
     };
 
+    useEffect(() => {
+        updateCurrentLocation(); // 처음에 위치 요청
+        return () => {
+            if (mapInstance.current) {
+                console.log("map destroy");
+                mapInstance.current.destroy();
+            }
+        };
+    }, []);
+
+    useEffect(() => {
+        if (isScriptLoaded && currentLocation && mapRef.current && !mapInstance.current) {
+            initialize();
+        }
+    }, [isScriptLoaded, currentLocation]);
+
+    useEffect(() => {
+        if (mapInstance.current && currentLocation) {
+            const center = new naver.maps.LatLng(currentLocation.lat, currentLocation.lng);
+            mapInstance.current.setCenter(center);
+        }
+    }, [currentLocation]);;
+
     return (
         <>
             <MarkerDrawer showDrawer={showMarkerDrawer} setDrawer={setMarkerDrawer} restaurant={selectedRestaurant} />
             <div className={styles.base}>
+                <div className={styles.branding}>
+                    <h3>duriseo-fe</h3>
+                </div>
+                <div className={styles.currentLocation} onClick={handleCurrentLocationClick}>
+                    <ViewfinderCircleIcon className={styles.icon} />
+                </div>
                 <div className={styles.map} id="map" ref={mapRef}></div>
-                <Script src={`https://oapi.map.naver.com/openapi/v3/maps.js?ncpKeyId=${process.env.NEXT_PUBLIC_NCP_CLIENT_ID}`} onLoad={initialize} />
+                <Script src={`https://oapi.map.naver.com/openapi/v3/maps.js?ncpKeyId=${process.env.NEXT_PUBLIC_NCP_CLIENT_ID}`} onLoad={() => setScriptLoaded(true)} />
             </div>
         </>
     );
