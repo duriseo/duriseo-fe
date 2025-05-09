@@ -12,13 +12,12 @@ WORKDIR /usr/src/duriseo-fe
 COPY package*.json ./
 RUN npm ci --legacy-peer-deps
 
-COPY .env ./
-
 # Build
 FROM base AS builder
 WORKDIR /usr/src/duriseo-fe
 
 # Copy necessary files
+COPY .env ./
 COPY --from=deps /usr/src/duriseo-fe/node_modules ./node_modules
 COPY . .
 
@@ -29,6 +28,7 @@ RUN npm run build
 FROM base AS runner 
 WORKDIR /usr/src/duriseo-fe
 
+COPY --from=builder /usr/src/duriseo-fe/.env ./.env
 COPY --from=builder /usr/src/duriseo-fe/.next ./.next
 COPY --from=builder /usr/src/duriseo-fe/public ./public
 COPY --from=builder /usr/src/duriseo-fe/package.json ./package.json
