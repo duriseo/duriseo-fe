@@ -9,9 +9,10 @@
         z-index: var(--main-overlay-z-index);
         background: var(--white);
         margin: 1rem;
-        padding: .5rem;
+        padding: .75rem;
         border-radius: var(--border-radius);
         box-shadow: var(--box-shadow-sm);
+        color: var(--primary500);
     }
 
     .currentLocation {

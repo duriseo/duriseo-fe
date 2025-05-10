@@ -5,7 +5,6 @@ import localFont from "next/font/local";
 import BottomNavbar from "./components/BottomNavbar";
 import { Toaster } from "sonner";
 import SWRProvider from "./components/SWRProvider";
-import ProtectedRoute from "./components/ProtectedRoute";
 
 interface Props {
     children: Readonly<React.ReactNode>;
@@ -19,7 +18,7 @@ const font = localFont({
 });
 
 export const metadata: Metadata = {
-    title: "duriseo-fe",
+    title: "온밥 (ON:밥)",
     description: "",
 };
 

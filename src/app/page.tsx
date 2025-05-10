@@ -134,7 +134,7 @@ export default function HomePage() {
             <MarkerDrawer showDrawer={showMarkerDrawer} setDrawer={setMarkerDrawer} restaurant={selectedRestaurant} />
             <div className={styles.base}>
                 <div className={styles.branding}>
-                    <h3>duriseo-fe</h3>
+                    <h3>온밥 (ON:밥)</h3>
                 </div>
                 <div className={styles.currentLocation} onClick={handleCurrentLocationClick}>
                     <ViewfinderCircleIcon className={styles.icon} />
