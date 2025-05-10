@@ -2,18 +2,31 @@ import { Modal, ModalWrapper, ModalHeader, ModalTitle, ModalContent } from "../M
 import styles from "@/styles/components/modals/VoucherConfirmationModal.module.scss";
 import VoucherIssuedModal from "./VoucherIssuedModal";
 import { useState } from "react";
+import { toast } from "sonner";
+import { api } from "@/libs/api";
+import { API_VOUCHERS_ACQUIRED } from "@/constants";
 interface Props {
     showModal: boolean;
     setModal: (open: boolean) => void;
+    voucherId: number;
 }
 
-const VoucherConfirmationModal = ({ showModal, setModal }: Props) => {
+const VoucherConfirmationModal = ({ showModal, setModal, voucherId }: Props) => {
     const [showIssuedModal, setIssuedModal] = useState(false);
 
-    const handleSubmit = () => {
+    const handleSubmit = async () => {
         console.log("submit");
-        setModal(false);
-        setIssuedModal(true);
+
+        try {
+            const response = await api.post(`${API_VOUCHERS_ACQUIRED}/${voucherId}`, {});
+
+            if (response.code !== 200) throw new Error(response.data.message);
+            setModal(false);
+            setIssuedModal(true);
+        } catch (e) {
+            toast.error(e.message);
+            setModal(false);
+        }
     };
 
     return (

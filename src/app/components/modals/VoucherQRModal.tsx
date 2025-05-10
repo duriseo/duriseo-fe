@@ -6,6 +6,7 @@ import { useEffect, useRef, useState } from "react";
 interface Props {
     showModal: boolean;
     setModal: (open: boolean) => void;
+    data: string;
 }
 
 const formatTime = (seconds: number) => {
@@ -14,7 +15,7 @@ const formatTime = (seconds: number) => {
     return `${m}:${s}`;
 };
 
-const VoucherQRModal = ({ showModal, setModal }: Props) => {
+const VoucherQRModal = ({ showModal, setModal, data }: Props) => {
     const [timeLeft, setTimeLeft] = useState(0);
     const intervalRef = useRef<NodeJS.Timeout | null>(null);
 
@@ -53,7 +54,7 @@ const VoucherQRModal = ({ showModal, setModal }: Props) => {
                 <ModalContent>
                     <div className={styles.base}>
                         <div className={styles.contentWrapper}>
-                            <QRCodeSVG size={256} value="dd" />
+                            <QRCodeSVG size={256} value={data} />
                             <h3 className={styles.timer}>{formatTime(timeLeft)}</h3>
                             <p className={styles.description}>현재 화면을 직원에게 보여주세요.</p>
                         </div>

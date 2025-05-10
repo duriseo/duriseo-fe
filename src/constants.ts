@@ -11,3 +11,4 @@ export const API_BENEFICIARIES_APPLY = API_BENEFICIARIES + "/apply";
 export const API_RESTAURANTS = API_BASEURL + "/restaurants";
 
 export const API_VOUCHERS = API_BASEURL + "/vouchers";
+export const API_VOUCHERS_ACQUIRED = API_VOUCHERS + "/acquired";

@@ -4,6 +4,7 @@ import styles from "@/styles/components/drawers/MarkerDrawer.module.scss"
 import VoucherConfirmationModal from "../modals/VoucherConfirmationModal";
 import { useState } from "react";
 import Link from "next/link";
+import useAuth from "@/hooks/useAuth";
 
 interface Props {
     showDrawer: boolean;
@@ -12,17 +13,18 @@ interface Props {
 }
 
 const MarkerDrawer = ({ showDrawer, setDrawer, restaurant }: Props) => {
+    const { user } = useAuth();
     const [showModal, setModal] = useState(false);
+    const voucherId = restaurant?.remainingVouchers ? restaurant.voucherIds[0] : null;
 
     const handleAcquire = () => {
         if (restaurant.remainingVouchers == 0) return;
-
         setModal(true);
     };
 
     return restaurant ? (
         <>
-            <VoucherConfirmationModal showModal={showModal} setModal={setModal} />
+            <VoucherConfirmationModal showModal={showModal} setModal={setModal} voucherId={voucherId} />
             <Drawer open={showDrawer} onOpenChange={setDrawer}>
                 <DrawerContent>
                     <DrawerHeader>
@@ -37,10 +39,12 @@ const MarkerDrawer = ({ showDrawer, setDrawer, restaurant }: Props) => {
                                 <span>전화</span>
                             </div>
                         </Link>
-                        <div onClick={handleAcquire} className={[styles.action, styles.accent, restaurant.remainingVouchers == 0 ? styles.disabled : 0].join(" ")}>
-                            <TicketIcon className={styles.icon} />
-                            <span>식권 받기</span>
-                        </div>
+                        {user?.role == "BENEFICIARY" &&
+                            <div onClick={handleAcquire} className={[styles.action, styles.accent, restaurant.remainingVouchers == 0 ? styles.disabled : 0].join(" ")}>
+                                <TicketIcon className={styles.icon} />
+                                <span>식권 받기</span>
+                            </div>
+                        }
                     </div>
                 </DrawerContent>
             </Drawer>
