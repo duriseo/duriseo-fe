@@ -14,6 +14,12 @@ interface Props {
 const MarkerDrawer = ({ showDrawer, setDrawer, restaurant }: Props) => {
     const [showModal, setModal] = useState(false);
 
+    const handleAcquire = () => {
+        if (restaurant.remainingVouchers == 0) return;
+
+        setModal(true);
+    };
+
     return restaurant ? (
         <>
             <VoucherConfirmationModal showModal={showModal} setModal={setModal} />
@@ -23,6 +29,7 @@ const MarkerDrawer = ({ showDrawer, setDrawer, restaurant }: Props) => {
                         <DrawerTitle>{restaurant.name}</DrawerTitle>
                         <DrawerDescription>{restaurant.address}</DrawerDescription>
                     </DrawerHeader>
+                    <p>남은 식권: {restaurant.remainingVouchers}</p>
                     <div className={styles.actions}>
                         <Link href={`tel:${restaurant.phoneNumber}`}>
                             <div className={styles.action}>
@@ -30,7 +37,7 @@ const MarkerDrawer = ({ showDrawer, setDrawer, restaurant }: Props) => {
                                 <span>전화</span>
                             </div>
                         </Link>
-                        <div onClick={() => setModal(true)} className={[styles.action, styles.accent].join(" ")}>
+                        <div onClick={handleAcquire} className={[styles.action, styles.accent, restaurant.remainingVouchers == 0 ? styles.disabled : 0].join(" ")}>
                             <TicketIcon className={styles.icon} />
                             <span>식권 받기</span>
                         </div>
